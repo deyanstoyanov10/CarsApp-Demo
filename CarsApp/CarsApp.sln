@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarsApp.Data", "CarsApp.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsApp.Services", "CarsApp.Services\CarsApp.Services.csproj", "{941CAF23-420E-4FA9-9B0B-BAF8C67018EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarsApp.Models", "CarsApp.Models\CarsApp.Models.csproj", "{187227F5-8611-4455-9DC9-BD96A3BD6F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{941CAF23-420E-4FA9-9B0B-BAF8C67018EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{941CAF23-420E-4FA9-9B0B-BAF8C67018EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{941CAF23-420E-4FA9-9B0B-BAF8C67018EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{187227F5-8611-4455-9DC9-BD96A3BD6F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{187227F5-8611-4455-9DC9-BD96A3BD6F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{187227F5-8611-4455-9DC9-BD96A3BD6F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{187227F5-8611-4455-9DC9-BD96A3BD6F27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
