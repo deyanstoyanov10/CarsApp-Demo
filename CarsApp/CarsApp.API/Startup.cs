@@ -46,10 +46,8 @@ namespace CarsApp.API
                 {
                     endpoints.MapControllers();
                     endpoints.MapFallbackToFile("index.html");
-                });
-
-
-            app.ApplyMigrations();
+                })
+                .ApplyMigrations();
         }
     }
 }

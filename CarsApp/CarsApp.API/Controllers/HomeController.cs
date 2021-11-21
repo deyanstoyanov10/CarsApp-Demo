@@ -12,7 +12,7 @@
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet(nameof(Test))]
         public ActionResult Test()
         {
             return Ok("Initial Test");
