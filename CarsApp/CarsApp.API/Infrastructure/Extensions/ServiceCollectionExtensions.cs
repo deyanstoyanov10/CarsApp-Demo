@@ -1,7 +1,11 @@
 ﻿namespace CarsApp.API.Infrastructure.Extensions
 {
     using CarsApp.Data;
+    using CarsApp.Common;
     using CarsApp.Data.Models;
+
+    using Services.Authentication;
+    using Services.Authentication.Contracts;
 
     using Microsoft.OpenApi.Models;
     using Microsoft.AspNetCore.Identity;
@@ -88,6 +92,8 @@
             });
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-                => services;
+                => services
+                        .AddTransient<IAuthService, AuthService>()
+                        .AddTransient<ITokenGeneratorService, TokenGeneratorService>();
     }
 }

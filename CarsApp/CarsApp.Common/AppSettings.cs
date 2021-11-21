@@ -1,4 +1,4 @@
-﻿namespace CarsApp.API
+﻿namespace CarsApp.Common
 {
     public class AppSettings
     {

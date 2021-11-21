@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CarsApp.Common\CarsApp.Common.csproj" />
     <ProjectReference Include="..\CarsApp.Data\CarsApp.Data.csproj" />
     <ProjectReference Include="..\CarsApp.Services\CarsApp.Services.csproj" />
   </ItemGroup>
