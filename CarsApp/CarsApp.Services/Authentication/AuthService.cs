@@ -1,7 +1,7 @@
 ﻿namespace CarsApp.Services.Authentication
 {
     using Data.Models;
-    using Common.ServiceResult;
+    using Common.Exceptions;
     using Authentication.Contracts;
 
     using Microsoft.AspNetCore.Identity;
@@ -13,7 +13,9 @@
 
     public class AuthService : IAuthService
     {
-        private const string InvalidErrorMessage = "Invalid credentials.";
+        private const string USERNAME_ALREADY_EXIST_MESSAGE = "Username already exists.";
+        private const string EMAIL_ALREADY_EXIST_MESSAGE = "Email already exists.";
+        private const string INVALID_CREDENTIALS_MESSAGE = "Invalid credentials.";
 
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenGeneratorService _tokenGenerator;
@@ -26,22 +28,37 @@
             _tokenGenerator = tokenGenerator;
         }
 
-        //public async Task<AppUser> Register(RegisterUserInputModel registerInput)
-        //{
-        //    var user = new AppUser
-        //    {
-        //        Email = registerInput.email,
-        //        UserName = registerInput.username,
-        //    };
+        public async Task<AppUser> Register(RegisterUserInputModel registerInput)
+        {
+            var appUserCheckEmail = await _userManager.FindByEmailAsync(registerInput.email);
 
-        //    var identityResult = await _userManager.CreateAsync(user, registerInput.password);
+            if (appUserCheckEmail is not null)
+            {
+                throw new EmailAlreadyExistingException(EMAIL_ALREADY_EXIST_MESSAGE);
+            }
 
-        //    var errors = identityResult.Errors.Select(e => e.Description);
+            var appUserUsernameCheck = await _userManager.FindByNameAsync(registerInput.username);
 
-        //    return identityResult.Succeeded
-        //        ? Result<User>.SuccessWith(user)
-        //        : Result<User>.Failure(errors);
-        //}
+            if (appUserUsernameCheck is not null)
+            {
+                throw new UsernameAlreadyExistingException(USERNAME_ALREADY_EXIST_MESSAGE);
+            }
+
+            var appUser = new AppUser
+            {
+                Email = registerInput.email,
+                UserName = registerInput.username,
+            };
+
+            var identityResult = await _userManager.CreateAsync(appUser, registerInput.password);
+
+            if (!identityResult.Succeeded)
+            {
+                throw new InvalidCredentialException(INVALID_CREDENTIALS_MESSAGE);
+            }
+
+            return appUser;
+        }
 
         public async Task<AppUserOutputModel> Login(LoginUserInputModel loginInput)
         {
@@ -49,13 +66,13 @@
 
             if (appUser == null)
             {
-                throw new InvalidCredentialException(InvalidErrorMessage);
+                throw new InvalidCredentialException(INVALID_CREDENTIALS_MESSAGE);
             }
-
+            
             var passwordValid = await _userManager.CheckPasswordAsync(appUser, loginInput.password);
             if (!passwordValid)
             {
-                throw new InvalidCredentialException(InvalidErrorMessage);
+                throw new InvalidCredentialException(INVALID_CREDENTIALS_MESSAGE);
             }
 
             var roles = await _userManager.GetRolesAsync(appUser);
