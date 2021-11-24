@@ -1,4 +1,4 @@
-﻿namespace CarsApp.API.Infrastructure.Extensions
+﻿namespace CarsApp.Infrastructure.Extensions
 {
     using CarsApp.Data;
 

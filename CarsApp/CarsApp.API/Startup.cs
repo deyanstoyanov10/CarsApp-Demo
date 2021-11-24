@@ -1,6 +1,6 @@
 namespace CarsApp.API
 {
-    using Infrastructure.Extensions;
+    using CarsApp.Infrastructure.Extensions;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -21,7 +21,7 @@ namespace CarsApp.API
                     .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
                     .AddSwagger()
                     .AddApplicationServices()
-                    .AddControllers();
+                    .AddApiControllers();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

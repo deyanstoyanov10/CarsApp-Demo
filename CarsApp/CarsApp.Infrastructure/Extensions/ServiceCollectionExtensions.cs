@@ -1,8 +1,9 @@
-﻿namespace CarsApp.API.Infrastructure.Extensions
+﻿namespace CarsApp.Infrastructure.Extensions
 {
-    using CarsApp.Data;
-    using CarsApp.Common;
-    using CarsApp.Data.Models;
+    using Data;
+    using Common;
+    using Filters;
+    using Data.Models;
 
     using Services.Authentication;
     using Services.Authentication.Contracts;
@@ -37,7 +38,7 @@
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
             services
-                .AddDefaultIdentity<AppUser>(options =>
+                .AddIdentity<AppUser, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
@@ -45,7 +46,6 @@
                     options.Password.RequireUppercase = false;
                     options.SignIn.RequireConfirmedAccount = false;
                 })
-                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<CarsDbContext>();
 
             return services;
@@ -86,14 +86,20 @@
                     "v1",
                     new OpenApiInfo
                     {
-                        Title = "Cars Web API",
+                        Title = "Cars API",
                         Version = "v1"
                     });
             });
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
-                => services
-                        .AddTransient<IAuthService, AuthService>()
-                        .AddTransient<ITokenGeneratorService, TokenGeneratorService>();
+            => services
+                    .AddTransient<IAuthService, AuthService>()
+                    .AddTransient<ITokenGeneratorService, TokenGeneratorService>();
+
+        public static void AddApiControllers(this IServiceCollection services)
+            => services
+                    .AddControllers(opt => opt
+                        .Filters
+                        .Add<ModelStateValidationFilter>());
     }
 }
