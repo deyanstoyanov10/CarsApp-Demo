@@ -48,6 +48,8 @@
             {
                 Email = registerInput.email,
                 UserName = registerInput.username,
+                FirstName = registerInput.firstName,
+                LastName = registerInput.lastName
             };
 
             var identityResult = await _userManager.CreateAsync(appUser, registerInput.password);
