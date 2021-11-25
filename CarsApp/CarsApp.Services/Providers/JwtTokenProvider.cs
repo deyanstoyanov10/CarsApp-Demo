@@ -1,31 +1,37 @@
-﻿namespace CarsApp.Services.Authentication
+﻿namespace CarsApp.Services.Providers
 {
-    using Authentication.Contracts;
-
-    using CarsApp.Common;
-    using CarsApp.Data.Models;
+    using Common;
+    using Contracts;
+    using Data.Models;
 
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
 
-    using System;
     using System.Linq;
     using System.Text;
     using System.Security.Claims;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
 
-    public class TokenGeneratorService : ITokenGeneratorService
+    public class JwtTokenProvider : IJwtTokenProvider
     {
-        private readonly AppSettings applicationSettings;
+        private const int TOKEN_EXPIRES_DAYS = 7;
 
-        public TokenGeneratorService(IOptions<AppSettings> applicationSettings)
-            => this.applicationSettings = applicationSettings.Value;
+        private readonly AppSettings _applicationSettings;
+        private readonly IDateTimeProvider _dateTimeProvider;
+
+        public JwtTokenProvider(
+            IDateTimeProvider dateTimeProvider,
+            IOptions<AppSettings> applicationSettings)
+        {
+            _dateTimeProvider = dateTimeProvider;
+            _applicationSettings = applicationSettings.Value;
+        }
 
         public string GenerateToken(AppUser user, IEnumerable<string> roles = null)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(this.applicationSettings.Secret);
+            var key = Encoding.ASCII.GetBytes(_applicationSettings.Secret);
 
             var claims = new List<Claim>
             {
@@ -40,7 +46,7 @@
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(7),
+                Expires = _dateTimeProvider.GetDateTimeNow().AddDays(TOKEN_EXPIRES_DAYS),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)

@@ -2,6 +2,7 @@
 {
     using Data.Models;
     using Common.Exceptions;
+    using Providers.Contracts;
     using Authentication.Contracts;
 
     using Microsoft.AspNetCore.Identity;
@@ -18,14 +19,14 @@
         private const string INVALID_CREDENTIALS_MESSAGE = "Invalid credentials.";
 
         private readonly UserManager<AppUser> _userManager;
-        private readonly ITokenGeneratorService _tokenGenerator;
+        private readonly IJwtTokenProvider _jwtTokenProvider;
 
         public AuthService(
             UserManager<AppUser> userManager,
-            ITokenGeneratorService tokenGenerator)
+            IJwtTokenProvider jwtTokenProvider)
         {
             _userManager = userManager;
-            _tokenGenerator = tokenGenerator;
+            _jwtTokenProvider = jwtTokenProvider;
         }
 
         public async Task<AppUser> Register(RegisterUserInputModel registerInput)
@@ -79,7 +80,7 @@
 
             var roles = await _userManager.GetRolesAsync(appUser);
 
-            var token = _tokenGenerator.GenerateToken(appUser, roles);
+            var token = _jwtTokenProvider.GenerateToken(appUser, roles);
 
             return new AppUserOutputModel(token);
         }

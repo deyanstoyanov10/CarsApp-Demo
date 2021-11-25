@@ -5,6 +5,9 @@
     using Filters;
     using Data.Models;
 
+    using Services.Providers;
+    using Services.Providers.Contracts;
+
     using Services.Authentication;
     using Services.Authentication.Contracts;
 
@@ -93,8 +96,12 @@
 
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
             => services
-                    .AddTransient<IAuthService, AuthService>()
-                    .AddTransient<ITokenGeneratorService, TokenGeneratorService>();
+                    .AddTransient<IAuthService, AuthService>();
+
+        public static IServiceCollection AddApplicationProviders(this IServiceCollection services)
+            => services
+                    .AddTransient<IJwtTokenProvider, JwtTokenProvider>()
+                    .AddTransient<IDateTimeProvider, DateTimeProvider>();
 
         public static void AddApiControllers(this IServiceCollection services)
             => services

@@ -21,6 +21,7 @@ namespace CarsApp.API
                     .AddJwtAuthentication(services.GetApplicationSettings(this.Configuration))
                     .AddSwagger()
                     .AddApplicationServices()
+                    .AddApplicationProviders()
                     .AddApiControllers();
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
