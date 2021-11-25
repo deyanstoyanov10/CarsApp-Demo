@@ -20,7 +20,7 @@
 
         [HttpPost]
         [Route(nameof(Register))]
-        public async Task<ActionResult<AppUserOutputModel>> Register(RegisterUserInputModel registerInput)
+        public async Task<ActionResult<AppUserOutputModel>> Register([FromBody] RegisterUserInputModel registerInput)
         {
             AppUser appUser;
 
@@ -46,7 +46,7 @@
 
         [HttpPost]
         [Route(nameof(Login))]
-        public async Task<ActionResult<AppUserOutputModel>> Login(LoginUserInputModel loginInput)
+        public async Task<ActionResult<AppUserOutputModel>> Login([FromBody] LoginUserInputModel loginInput)
         {
             AppUserOutputModel userOutputModel;
 
