@@ -20,13 +20,15 @@
                     options.RoutePrefix = string.Empty;
                 });
 
-        public static void ApplyMigrations(this IApplicationBuilder app)
+        public static IApplicationBuilder ApplyMigrations(this IApplicationBuilder app)
         {
             using var services = app.ApplicationServices.CreateScope();
 
             var dbContext = services.ServiceProvider.GetService<CarsDbContext>();
 
             dbContext.Database.Migrate();
+
+            return app;
         }
 
         public static void SeedDatabase(this IApplicationBuilder app)
@@ -37,7 +39,8 @@
 
             List<ISeeder> seeders = new List<ISeeder>()
             {
-                new BrandSeeder(dbContext)
+                new BrandSeeder(dbContext),
+                new ModelSeeder(dbContext)
             };
 
             foreach (var seeder in seeders)

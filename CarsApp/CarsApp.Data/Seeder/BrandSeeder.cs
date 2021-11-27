@@ -10,10 +10,8 @@
         private readonly CarsDbContext _data;
         private IEnumerable<string> brands;
 
-        public BrandSeeder(CarsDbContext data)
-        {
-            _data = data;
-        }
+        public BrandSeeder(CarsDbContext data) =>_data = data;
+
         public void Seed()
         {
             if (_data.Brands.Any())
@@ -93,13 +91,11 @@
                 "Range Rover",
                 "Cadillac",
                 "Lincoln",
-                "Volga",
                 "Hummer",
                 "Maserati",
                 "MG",
                 "Bentley",
                 "Pontiac",
-                "Iveco",
                 "Pagani",
                 "Koenigsegg",
                 "Ferrari",
@@ -107,7 +103,6 @@
                 "Datsun",
                 "Austin",
                 "Acura",
-                "Vauxhall",
                 "Lamborghini",
                 "Maybach",
                 "Haval",
