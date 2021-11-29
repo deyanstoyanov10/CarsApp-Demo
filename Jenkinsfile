@@ -14,12 +14,7 @@ pipeline {
         }
         stage('Restore packages') {
             steps {
-                powershell(
-                    script: """ 
-                    cd CarsApp
-                    dotnet restore
-                    cd ..
-                    """)
+                bat "dotnet restore ${workspace}\\CarsApp\\CarsApp.sln"
             }
         }
     }
