@@ -14,8 +14,7 @@ pipeline {
         }
         stage('Restore Packages') {
             steps {
-                sh 'cd CarsApp'
-                echo $"{workspace}"
+                sh('pwsh -version')
             }
         }
     }
