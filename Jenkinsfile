@@ -16,7 +16,7 @@ pipeline {
             steps {
                 powershell(
                     script: """ 
-                    cd CarsApp
+                    cd CarsApp/
                     dotnet restore
                     cd ..
                     """)    
