@@ -16,7 +16,8 @@ pipeline {
             steps {
                 sh '''
                     cd CarsApp
-                    ls
+                    dotnet restore
+                    cd ..
                 '''
             }
         }
