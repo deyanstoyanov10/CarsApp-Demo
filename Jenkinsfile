@@ -14,9 +14,10 @@ pipeline {
         }
         stage('Restore Packages') {
             steps {
-                sh 'cd CarsApp'
-                sh 'ls'
-            }
+                sh '''
+                    cd CarsApp
+                    ls
+                '''
         }
     }
 }
