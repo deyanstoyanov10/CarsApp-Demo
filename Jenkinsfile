@@ -14,11 +14,9 @@ pipeline {
         }
         stage('Restore Packages') {
             steps {
-                powershell(script: """ 
-                cd CarsApp
-                dotnet restore
-                cd ..
-                """)
+                sh 'cd CarsApp'
+                sh 'dotnet restore'
+                sh 'cd ..'
             }
         }
     }
