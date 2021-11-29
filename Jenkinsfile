@@ -1,13 +1,15 @@
 pipeline {
     agent any
-    stage ('Clean workspace') {
-        steps {
-            cleanWs()
+    stages {
+        stage ('Clean workspace') {
+            steps {
+                cleanWs()
+            }
         }
-    }
-    stage('Verify Branch') {
-      steps {
-            echo "$Branch"
+        stage('Verify Branch') {
+            steps {
+                echo "$Branch"
+            }
         }
     }
 }
