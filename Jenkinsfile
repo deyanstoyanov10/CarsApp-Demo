@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Restore Packages') {
             steps {
-                sh('pwsh -version')
+                sh 'ls'
             }
         }
     }
