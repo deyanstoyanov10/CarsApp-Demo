@@ -18,6 +18,7 @@ pipeline {
                     cd CarsApp
                     ls
                 '''
+            }
         }
     }
 }
