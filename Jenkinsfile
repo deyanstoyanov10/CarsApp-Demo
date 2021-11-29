@@ -14,9 +14,9 @@ pipeline {
         }
         stage('Restore Packages') {
             steps {
-                powershell(
+                pwsh(
                     script: """ 
-                    cd CarsApp/
+                    cd .\\CarsApp\\
                     dotnet restore
                     cd ..
                     """)    
