@@ -6,9 +6,20 @@ pipeline {
                 cleanWs()
             }
         }
-        stage('Verify Branch') {
+        stage('Git Clone') {
             steps {
-                echo "$Branch"
+                git branch: "$Branch",
+                url: 'https://github.com/deyanstoyanov10/CarsApp-Demo.git'
+            }
+        }
+        stage('Restore packages') {
+            steps {
+                powershell(
+                    script: """ 
+                    cd CarsApp
+                    dotnet restore
+                    cd ..
+                    """)
             }
         }
     }
