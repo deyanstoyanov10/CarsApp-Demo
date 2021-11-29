@@ -15,8 +15,7 @@ pipeline {
         stage('Restore Packages') {
             steps {
                 sh 'cd CarsApp'
-                sh 'dotnet restore'
-                sh 'cd ..'
+                echo $"{workspace}"
             }
         }
     }
