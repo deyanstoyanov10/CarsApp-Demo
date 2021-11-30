@@ -15,9 +15,7 @@ pipeline {
         stage('Restore Packages') {
             steps {
                 sh '''
-                    cd CarsApp
-                    dotnetRestore
-                    cd ..
+                    dotnet --info
                 '''
             }
         }
