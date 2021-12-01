@@ -15,7 +15,7 @@ pipeline {
         stage('Restore Packages') {
             steps {
                 sh '''
-                    dotnet --info
+                    dotnet --version
                 '''
             }
         }
