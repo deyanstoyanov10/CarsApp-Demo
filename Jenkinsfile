@@ -22,5 +22,10 @@ pipeline {
                 dotnetRestore project: PROJECT + '.sln', sdk: '.net', workDirectory: env.WORKSPACE + '/' + PROJECT
             }
         }
+        stage('Build Project') {
+            steps {
+                dotnetBuild configuration: "$BUILD_CONFIGURATION", project: PROJECT + '.sln', sdk: '.net', workDirectory: env.WORKSPACE + '/' + PROJECT
+            }
+        }
     }
 }
