@@ -27,5 +27,10 @@ pipeline {
                 dotnetBuild configuration: "$BUILD_CONFIGURATION", project: PROJECT + '.sln', sdk: '.net', workDirectory: env.WORKSPACE + '/' + PROJECT
             }
         }
+        stage('Tests') {
+            steps {
+                dotnetTest configuration: "$BUILD_CONFIGURATION", project: PROJECT + '.sln', sdk: '.net', workDirectory: env.WORKSPACE + '/' + PROJECT
+            }
+        }
     }
 }
