@@ -6,6 +6,6 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
+		<RuntimeHostConfigurationOption Include="System.Globalization.UseNls" Value="true" />
 	</ItemGroup>
 </Project>
