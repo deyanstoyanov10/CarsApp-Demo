@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-CarsApp.API-9A029993-CB37-4FFC-8407-1293C56F7D67</UserSecretsId>
-	<InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CarsApp.Common\CarsApp.Common.csproj" />
+	  <RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
+
+	  <ProjectReference Include="..\CarsApp.Common\CarsApp.Common.csproj" />
     <ProjectReference Include="..\CarsApp.Data\CarsApp.Data.csproj" />
     <ProjectReference Include="..\CarsApp.Infrastructure\CarsApp.Infrastructure.csproj" />
     <ProjectReference Include="..\CarsApp.Services\CarsApp.Services.csproj" />
