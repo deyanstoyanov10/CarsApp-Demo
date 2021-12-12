@@ -1,19 +1,19 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-focal AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ENV ASPNETCORE_URLS=http://+:5000
-
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
-
-FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["CarsApp.API.csproj", "./"]
-RUN dotnet restore "CarsApp.API.csproj"
+COPY ["CarsApp.API/CarsApp.API.csproj", "CarsApp.API/"]
+COPY ["CarsApp.Infrastructure/CarsApp.Infrastructure.csproj", "CarsApp.Infrastructure/"]
+COPY ["CarsApp.Common/CarsApp.Common.csproj", "CarsApp.Common/"]
+COPY ["CarsApp.Data/CarsApp.Data.csproj", "CarsApp.Data/"]
+COPY ["CarsApp.Services/CarsApp.Services.csproj", "CarsApp.Services/"]
+COPY ["CarsApp.Models/CarsApp.Models.csproj", "CarsApp.Models/"]
+RUN dotnet restore "CarsApp.API/CarsApp.API.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/CarsApp.API"
 RUN dotnet build "CarsApp.API.csproj" -c Debug -o /app/build
 
 FROM build AS publish

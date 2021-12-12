@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+  data:
+        container_name: sqlserver
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports: 
+            - "1433:1433"
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=mysqldataStrongPassword@!#()
+        volumes: 
+            - sqldata:/var/opt/mssql
+        networks: 
+            - carsapp-network
+
+  carsapi:
+        container_name: cars-api
+        image: dockec2021/cars-api
+        build:
+            context: ./CarsApp
+            dockerfile: ./CarsApp.API/Dockerfile
+        ports: 
+            - "5000:80"
+        restart: on-failure
+        networks: 
+            - carsapp-network
+        depends_on:
+            - data
+
+networks:
+  carsapp-network:
+
+volumes:
+  sqldata:
