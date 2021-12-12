@@ -1,4 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
