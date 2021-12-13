@@ -64,4 +64,4 @@ spec:
       volumes:
       - name: cars-api-service-data
         persistentVolume:
-          claimName: cars-api-service-data
+        claimName: cars-api-service-data
