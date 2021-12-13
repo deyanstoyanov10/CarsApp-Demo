@@ -34,7 +34,7 @@ jobs:
 
       - name: Get nodes
         run: |
-            kubectl apply -f ./.k8s/.environment/development.yml
-            kubectl apply -f ./.k8s/database
-            kubectl apply -f ./.k8s/web-services
-            kubectl apply -f ./.k8s/ingress
+            kubectl apply -f /.k8s/.environment/development.yml
+            kubectl apply -f /.k8s/database/carsapi-database.yml
+            kubectl apply -f /.k8s/web-services/carsapi-service.yml
+            kubectl apply -f /.k8s/ingress/ingress-controller.yml
