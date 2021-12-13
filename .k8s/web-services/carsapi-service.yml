@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cars-api-service-data
+spec:
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany 
+  resources:
+    requests:
+      storage: 10Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: carsapi-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5001
+    targetPort: 80
+  selector:
+    web-service: carsapi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carsapi-service
+spec:
+  selector:
+    matchLabels:
+      web-service: carsapi
+  template:
+    metadata:
+      labels:
+        web-service: carsapi
+        system: server
+    spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                web-service: carsapi
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: carsapi-service
+        image: dockec2021/cars-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        volumeMounts:
+        - name: cars-api-service-data
+          mountPath: /root/.aspnet/DataProtection-Keys
+      volumes:
+      - name: cars-api-service-data
+        persistentVolumeClaim:
+          claimName: cars-api-service-data
