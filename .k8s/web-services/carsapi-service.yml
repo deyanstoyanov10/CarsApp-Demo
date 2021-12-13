@@ -1,15 +1,14 @@
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
   name: cars-api-service-data
 spec:
   accessModes:
   - ReadWriteOnce
   - ReadOnlyMany 
-  capacity:
-    storage: 100Mi
-  hostPath:
-    path: "/mnt/data/carsapi-service"
+  resources:
+    requests:
+      storage: 1Gi
 
 ---
 
@@ -63,5 +62,5 @@ spec:
           mountPath: /root/.aspnet/DataProtection-Keys
       volumes:
       - name: cars-api-service-data
-        persistentVolume:
+        persistentVolumeClaim:
         claimName: cars-api-service-data
