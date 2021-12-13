@@ -11,5 +11,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: carsapi-service
-              servicePort: 5001
+              service:
+                name: carsapi-service
+                port:
+                  number: 5001
