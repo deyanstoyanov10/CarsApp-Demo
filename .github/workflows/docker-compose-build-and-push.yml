@@ -25,12 +25,10 @@ jobs:
       - name: Docker Compose Push Images
         run: docker-compose push
 
-      - name: Set up kubectl
-        uses: matootie/dokube@v1.3.4
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
         with:
-          personalAccessToken: ${{ secrets.DIGITALOCEAN_TOKEN }}
-          clusterName: k8s-1-21-5-do-0-ams3-1639430246267
-          version: "1.21.5"
+          token: ${{ secrets.DIGITALOCEAN_TOKEN }}
 
       - name: Save DigitalOcean
         run: doctl kubernetes cluster kubeconfig save 5a93006e-c2c2-40a2-a975-a67db38d5dc8
