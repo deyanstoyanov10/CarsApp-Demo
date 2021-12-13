@@ -3,4 +3,4 @@ kind: Secret
 metadata:
   name: environment-secrets
 data:
-  cars-api-database-sa-password: mysqldataStrongPassword@!#()
+  cars-api-database-sa-password: bXlzcWxkYXRhU3Ryb25nUGFzc3dvcmRAISMoKQ==
