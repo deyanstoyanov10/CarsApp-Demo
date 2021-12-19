@@ -17,5 +17,11 @@
         {
             return Ok("Initial Test");
         }
+
+        [HttpGet(nameof(KubernetesTest))]
+        public ActionResult KubernetesTest()
+        {
+            return Ok("KubernetesTest Test");
+        }
     }
 }
