@@ -50,10 +50,3 @@ spec:
             cpu: "250m"
         ports:
         - containerPort: 80
-        volumeMounts:
-        - name: carsapi-service-pvc
-          mountPath: /root/.aspnet/DataProtection-Keys
-      volumes:
-      - name: carsapi-service-pvc
-        persistentVolumeClaim:
-          claimName: carsapi-service-pvc    
