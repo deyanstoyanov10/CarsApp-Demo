@@ -1,15 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cars-api-ingress-controller
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: ingress-controller
 spec:
   rules:
-  - http:
+  - host: "mytestcarsapi.com"
+    http:
       paths:
-      - path: /
-        pathType: Prefix
+      - pathType: Prefix
+        path: "/"
         backend:
           service:
             name: carsapi-service
