@@ -34,4 +34,6 @@ jobs:
         run: doctl kubernetes cluster kubeconfig save 5a93006e-c2c2-40a2-a975-a67db38d5dc8
 
       - name: Deploy to Kubernetes
-        run: kubectl apply -f ./.k8s/web-services/carsapi-service.yml
+        run: |
+          kubectl apply -f ./.k8s/web-services/carsapi-service.yml
+          kubectl apply -f ./.k8s/ingress/ingress-controller.yml
