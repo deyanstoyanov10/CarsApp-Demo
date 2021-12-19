@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: carsapi-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: carsapi-pod
   ports:
