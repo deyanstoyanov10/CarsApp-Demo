@@ -17,5 +17,11 @@
         {
             return Ok("Initial Test");
         }
+
+        [HttpGet(nameof(Test1))]
+        public ActionResult Test1()
+        {
+            return Ok("Initial Test");
+        }
     }
 }
