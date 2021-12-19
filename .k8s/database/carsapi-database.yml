@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cars-api-database-data
+  name: cars-api-database-pvc
 spec:
   accessModes:
   - ReadWriteOnce
@@ -62,9 +62,9 @@ spec:
               name: environment-secrets
               key: cars-api-database-sa-password
         volumeMounts:
-        - name: cars-api-database-data
+        - name: cars-api-database-pvc
           mountPath: /var/opt/mssql
       volumes:
-      - name: cars-api-database-data
+      - name: cars-api-database-pvc
         persistentVolumeClaim:
-          claimName: cars-api-database-data
+          claimName: cars-api-database-pvc
