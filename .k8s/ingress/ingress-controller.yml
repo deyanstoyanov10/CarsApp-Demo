@@ -6,13 +6,10 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: my-test-cars-api.com
+    - host: mytestcarsapi.com
       http:
         paths:
-          - path: /
-            pathType: Prefix
+        - path: /
             backend:
-              service:
-                name: carsapi-service
-                port:
-                  number: 5001
+              serviceName: carsapi-service
+              servicePort: 80
