@@ -4,7 +4,7 @@ metadata:
   name: name
 spec:
   rules:
-  - host: "mytestcarsapi.com"
+  - host: mytestcarsapi.com
     http:
       paths:
       - pathType: Prefix
