@@ -17,17 +17,5 @@
         {
             return Ok("Initial Test");
         }
-
-        [HttpGet(nameof(KubernetesTest))]
-        public ActionResult KubernetesTest()
-        {
-            return Ok("KubernetesTest Test");
-        }
-
-        [HttpGet(nameof(KubernetesTest2))]
-        public ActionResult KubernetesTest2()
-        {
-            return Ok("KubernetesTest Test2");
-        }
     }
 }
