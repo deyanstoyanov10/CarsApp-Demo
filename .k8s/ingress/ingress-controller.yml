@@ -9,7 +9,6 @@ spec:
     - host: mytestcarsapi.com
       http:
         paths:
-        - path: /
-            backend:
-              serviceName: carsapi-service
-              servicePort: 80
+          - backend:
+            serviceName: carsapi-service
+            servicePort: 5000
