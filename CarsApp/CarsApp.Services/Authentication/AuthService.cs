@@ -11,6 +11,8 @@
     using System.Security.Authentication;
 
     using static Models.Authentication.AuthenticationRecords;
+    using CarsApp.Common;
+    using CarsApp.Handlers.RegistrationValidation;
 
     public class AuthService : IAuthService
     {
@@ -83,6 +85,18 @@
             var token = _jwtTokenProvider.GenerateToken(appUser, roles);
 
             return new AppUserOutputModel(token);
+        }
+
+        public async Task<Result<AppUser>> RegisterTest(RegisterUserInputModel registerInput)
+        {
+            var handler = new EmailValidationHandler(_userManager);
+            handler
+                .SetNext(new UsernameValidationHandler(_userManager))
+                .SetNext(new CreateUserValidationHandler(_userManager));
+
+            var result = await handler.Execute(registerInput);
+
+            return result;
         }
     }
 }
